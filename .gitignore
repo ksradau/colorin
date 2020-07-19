@@ -1,7 +1,14 @@
+Pipfile.lock
+.idea/
+.static/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
+serverless/node_modules
+serverless/.serverless
 
 # C extensions
 *.so
@@ -102,7 +109,6 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
 .venv
 env/
 venv/
@@ -110,9 +116,15 @@ ENV/
 env.bak/
 venv.bak/
 
+.secrets.*
+
 # Spyder project settings
 .spyderproject
 .spyproject
+
+# create user ksradau with encrypted password '123';
+# create database ksradau_base with owner ksradau
+# psql -h localhost -U ksradau -W -d ksradau_base
 
 # Rope project settings
 .ropeproject
