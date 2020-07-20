@@ -17,9 +17,3 @@ def setup_periodic_tasks(sender, **_kwargs):
         tasks.invite_all_users.s(),
         name=tasks.invite_all_users.__name__,
     )
-
-    sender.add_periodic_task(
-        settings.CELERY_BEAT_SMILE,
-        tasks.send_smile.s(),
-        name=tasks.send_smile.__name__,
-    )
