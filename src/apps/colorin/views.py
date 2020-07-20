@@ -1,15 +1,15 @@
 from django.views.generic import TemplateView
 
-from apps.education.models import EducationPage
+from apps.colorin.models import ColorinPage
 
 
 class IndexView(TemplateView):
-    template_name = "education/index.html"
+    template_name = "colorin/index.html"
 
     def get_context_data(self, **kwargs):
         parent_ctx = super().get_context_data(**kwargs)
 
-        info = EducationPage.objects.first()
+        info = ColorinPage.objects.first()
         if info is not None:
             ctx = {
                 "title": info.title,
