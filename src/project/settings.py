@@ -18,7 +18,7 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-ALLOWED_HOSTS = _settings.ALLOWED_HOSTS + INTERNAL_IPS + ["localhost"] + ["2b5fd89964c5.ngrok.io"]
+ALLOWED_HOSTS = _settings.ALLOWED_HOSTS + INTERNAL_IPS + ["localhost"]
 
 
 INSTALLED_APPS = [
@@ -131,18 +131,15 @@ USE_L10N = True
 USE_TZ = True
 
 STATICFILES_DIRS = [
-    PROJECT_DIR / "static",  # где джанге брать статику
-    # apps/index.static
+    PROJECT_DIR / "static",
+
 ]
 
 STATIC_ROOT = (
     REPO_DIR / ".static"
-)  # куда соберется вся статика после команды collectstatic - папка создается. типа в джанге куча статики в разных местах и разных приложениях,
+)
+STATIC_URL = "/static/"
 
-STATIC_URL = "/static/"  # путь от которого все отсчитывается на разных сервисах
-
-# LOGIN_URL = reverse_lazy("onboarding:sign_in")
-# LOGIN_REDIRECT_URL = reverse_lazy("blog:all_posts")
 
 LOGIN_URL = reverse_lazy("authorization:sign_in")
 LOGIN_REDIRECT_URL = reverse_lazy("authorization:me")
@@ -159,11 +156,6 @@ EMAIL_USE_TLS = _settings.EMAIL_USE_TLS
 EMAIL_FROM = _settings.EMAIL_FROM
 
 
-
-#ENVVAR_PREFIX_FOR_DYNACONF=SD  если удалить то префикс будет DYNACONF   профайлинг
-# set DY=1 make run
-
-
 AWS_ACCESS_KEY_ID = _settings.AWS_ACCESS_KEY_ID
 AWS_DEFAULT_ACL = "public-read"
 AWS_LOCATION = _settings.AWS_LOCATION
@@ -171,9 +163,4 @@ AWS_QUERYSTRING_AUTH = False
 AWS_S3_ADDRESSING_STYLE = "path"
 AWS_S3_REGION_NAME = _settings.AWS_S3_REGION_NAME
 AWS_SECRET_ACCESS_KEY = _settings.AWS_SECRET_ACCESS_KEY
-AWS_STORAGE_BUCKET_NAME = "resizeksbucket"
-#add to secrets
-
-CELERY_BEAT_SMILE = _settings.CELERY_BEAT_SMILE
-TG = _settings.TG
-TG_MATRIX = _settings.TG_MATRIX
+AWS_STORAGE_BUCKET_NAME = "colorin"
