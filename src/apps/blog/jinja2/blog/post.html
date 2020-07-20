@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+<!--
+
+
+
+{{ information | safe }}
+-->
+
+{% block title %}{{ object.title }} — read the post{% endblock %}
+{% block header %}{{ object.title }}{% endblock %}
+{% block main %}
+    <br/><p>{{ object.preview }}</p><br/>
+    <p>{{ object.content | safe }}</p><br/>
+
+{% for photo in object.photos.all() %}
+            <a href="{{ photo.original.url }}"><img src="{{ photo.thumbnail.url if photo.thumbnail else None}}"></a>
+{% endfor %}
+
+    <p>Author: {{ object.author }}</p>
+<a class="nes-btn is-warning" href="{{ url('blog:all_posts') }}">Jump to all posts</a>
+
+<h3>Comments</h3>
+        {% if not object.comments.count() %}
+            <p>No one commented this</p>
+        {% endif %}
+        {% for comment in object.comments.all() %}
+            <section>
+                <p><i>{{ comment.message }}</i></p>
+                <p>&mdash; {{ comment.author.profile.name }}</p>
+            </section>
+        {% endfor %}
+        {% if not user.is_authenticated %}
+            <p><a href="{{ url('authorization:index') }}">Sign in</a> to leave a comment.</p>
+        {% else %}
+            <form action="{{ url('blog:comment', kwargs={'pk': object.pk}) }}" method="post">
+                {{ form.as_p() }}
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                <button class="nes-button" type="submit">Comment</button>
+            </form>
+        {% endif %}
+    </article>
+
+{% endblock %}

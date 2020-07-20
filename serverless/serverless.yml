@@ -1,0 +1,34 @@
+service: ks
+provider:
+  name: aws
+  runtime: python3.7
+  timeout: 60
+  versionFunctions: false
+  endpointType: REGIONAL
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 's3:ListBucket'
+      Resource:
+        - 'arn:aws:s3:::resizeksbucket/*'
+    - Effect: 'Allow'
+      Action:
+        - 's3:PutObject'
+        - 's3:PutObjectAcl'
+      Resource:
+        - 'arn:aws:s3:::resizeksbucket/*'
+functions:
+  resizer:
+    environment:
+      PYTHONPATH: src
+    handler: resizer.lambda_function.lambda_handler
+    events:
+      - s3:
+          bucket: resizeksbucket
+          event: s3:ObjectCreated:*
+          existing: true
+plugins:
+  - serverless-python-requirements
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux

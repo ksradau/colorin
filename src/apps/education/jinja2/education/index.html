@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block header %}{{ h1 }}{% endblock %}
+
+{% block main %}
+<h3>{{ university }}</h3>
+{{ text | safe }}
+<img src="{{ static('education/grad.png') }}" align="center" width="1000px" alt="Photo">
+{% endblock %}

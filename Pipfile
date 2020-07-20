@@ -4,11 +4,37 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+httpie = "*"
+black = "==19.10b0"
+codecov = "*"
+coverage = "*"
+ipython = "*"
+isort = "*"
+pudb = "*"
+pillow = "*"
 
 [packages]
 colorthief = "*"
 pillow = "*"
 haishoku = "*"
+django = {extras = ["bcrypt"],version = "*"}
+whitenoise = "*"
+dj-database-url = "*"
+dynaconf = {extras = ["yaml"],version = "*"}
+psycopg2 = "*"
+jinja2 = "*"
+djangorestframework = "*"
+delorean = "*"
+bcrypt = "*"
+celery = {extras = ["redis"],version = "*"}
+redis = "*"
+freezegun = "*"
+gunicorn = "*"
+boto3 = "*"
+django-storages = "*"
+drf-yasg = "*"
+
 
 [requires]
 python_version = "3.8"
+

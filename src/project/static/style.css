@@ -1,0 +1,64 @@
+nav {
+    float: right;
+    margin-top: 13px;
+}
+
+nav a {
+    display: inline;
+    padding: 0 20px;
+}
+
+body {
+    margin-top: 40px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+footer {
+    display: inline;
+}
+
+footer p {
+    display: inline;
+    padding: 0 20px;
+}
+
+header {
+    display: inline;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
+    border-bottom: 4px solid #D3D3D3;
+    background-color: white;
+}
+
+.marg {
+    margin-bottom: 150px;
+}
+
+img {
+    margin-right: 15px;
+    margin-bottom: 20px;
+}
+
+.github-link {
+    position: fixed;
+    top: 150px;
+    right: 10px;
+    z-index: 999;
+    display: flex;
+    height: 100px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.row {
+    margin-top: 50px;
+}
+
+.margin_head {
+    margin-bottom: 80px;
+}

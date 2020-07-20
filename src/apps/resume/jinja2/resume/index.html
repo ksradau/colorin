@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}{{ resume_list.first().title }}{% endblock %}
+
+{% block header %}{{ resume_list.first().h1 }}{% endblock %}
+
+{% block main %}
+
+<br/><p>
+    {{ resume_list.first().preview | safe }}
+</p>
+
+<p class="nes-text is-warning">
+    {{ resume_list.first().article | safe }}
+</p>
+<p>
+    {{ resume_list.first().text | safe }}
+</p>
+
+{% for project in object_list%}
+<div class="nes-container is-rounded">
+    <h3 class="nes-text is-primary"><a href="{{ project.link }}">{{ project.name }}</a></h3><br/>
+        <p>From {{ project.started_at }} till {{ project.finished_at }}</p>
+    <div class="nes-container is-dark is-rounded">
+    <h4 class="nes-text is-disabled">About project</h4>
+        <p>{{ project.summary }}</p>
+    </div><br/>
+    <h4 class="nes-text is-primary">My achievements</h4>
+        <p>{{ project.achievements_text }}</p>
+
+    {% if project.responsibilities.count()%}
+    <h4 class="nes-text is-primary">Responsibilities</h4>
+    <ul>
+    {% for resp in project.responsibilities.all()%}
+        <li>{{ resp.summary }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    <h4 class="nes-text is-primary">Technologies</h4>
+    <ul>
+        {% for technology in project.technologies.all()%}
+        <li>{{ technology.name }}</li>
+        {% endfor %}
+    </ul>
+</div><br/><br/>
+
+{% endfor %}
+
+{% endblock %}

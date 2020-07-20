@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block header %}{{ name }}{% endblock %}
+
+{% block main %}
+
+<h3>Junior Python Developer</h3>
+
+<div class="row">
+
+    <img class="col-4" src="{{ static('index/me_3.png') }}" width="80%" height="80%" align="left" alt="Main Photo">
+    <p class="col-7">{{ greeting | safe }}</p>
+</div>
+<a class="github-link" href="https://github.com/ksradau" target="_blank" rel="noopener">
+    <p class="nes-balloon from-right">See my GitHub</p>
+    <i class="nes-octocat animate"></i>
+</a>
+
+
+<h2><br/>About me</h2>
+<p>{{ about }}</p>
+
+<h2><br/>Technical Skills</h2>
+<div class="row">
+
+    <div class="col-5">
+
+        <!--<img src="./Ekaterina Sushko Personal Resume Website_files/rose.png" alt="Rose">-->
+
+        <progress class="nes-progress" value="{{ python_skill }}" max="100"></progress>
+        <p>Python</p>
+        <progress class="nes-progress is-primary" value="{{ django_skill }}" max="100"></progress>
+        <p>Django</p>
+        <progress class="nes-progress is-success" value="{{ html_skill }}" max="100"></progress>
+        <p>HTML / CSS</p>
+        <progress class="nes-progress is-primary" value="{{ seo_skill }}" max="100"></progress>
+        <p>SEO</p>
+    </div>
+    <div class="col-2"></div>
+
+    <div class="nes-container is-dark is-rounded with-title col-4">
+        <p class="title">In present</p>
+        <ul class="nes-list is-disc">
+            {{ present_activities | safe }}
+            <br/><br/>
+            <i class="nes-icon is-large star"></i><i class="nes-icon is-large star"></i><i
+                class="nes-icon is-large star"></i>
+        </ul>
+    </div>
+</div>
+
+</main>
+
+{% endblock %}

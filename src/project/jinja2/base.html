@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap-grid.min.css">
+    <link href="{{ static('style.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ static('favicon.ico') }}" rel="shortcut icon" type="image/png"/>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+<div class="marg">
+    <header>
+        <a href="{{ url('index:index') }}"><img src="{{ static('logo.jpg') }}" alt="Logo" width="100px"/></a>
+        <nav>
+            {% with ns = request.resolver_match.namespace %}
+            <a class="nes-btn {% if ns == 'index' %}is-primary{% endif %}" href="{{ url('index:index') }}">About me</a>
+            <a class="nes-btn {% if ns == 'resume' %}is-primary{% endif %}" href="{{ url('resume:index') }}">Resume</a>
+            <a class="nes-btn {% if ns == 'education' %}is-primary{% endif %}" href="{{ url('education:index') }}">Education</a>
+            <a class="nes-btn {% if ns == 'contact' %}is-primary{% endif %}" href="{{ url('blog:all_posts') }}">Blog</a>
+            {% endwith %}
+        </nav>
+    </header>
+</div>
+<main>
+    <h1>{% block header %}{% endblock %}</h1>
+
+    {% block main %}{% endblock %}
+</main>
+
+<footer>
+    <p><br/><br/><br/>~ (c) Ekaterina Sushko 2020 </p>
+    <p><a href="mailto:sushei.ekaterina@gmail.com">E-mail</a></p>
+    <p>
+        <a href="https://www.linkedin.com/in/%D0%B5%D0%BA%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%BD%D0%B0-%D1%81%D1%83%D1%88%D0%BA%D0%BE-b9b952197/">Linkedin</a>
+    </p>
+    <p><a href="https://t.me/ksradau">Telegram</a></p>
+    <p><a href="https://vk.com/ksradau">VK</a> ~<br/><br/><br/></p>
+</footer>
+</body>
+</html>
