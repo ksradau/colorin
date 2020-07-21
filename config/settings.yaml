@@ -9,7 +9,6 @@ default:
   SECRET_KEY: ""
   SITE_ID: 0
   CELERY_BEAT_INVITATION: -1
-  CELERY_BEAT_SMILE: 86400
   CELERY_BROKER_URL: ""
   EMAIL_FROM: ""
   EMAIL_HOST: ""
@@ -18,53 +17,35 @@ default:
   EMAIL_PORT: 0
   EMAIL_USE_SSL: 0
   EMAIL_USE_TLS: 0
-  TG: ""
-  TG_MATRIX: ""
 
 development:
-  TG: ""
-  TG_MATRIX: ""
   AWS_LOCATION: "development"
   AWS_S3_REGION_NAME: "us-east-1"
   DEBUG: true
-  SITE_ID: 1
+  SITE_ID: 2
   CELERY_BEAT_INVITATION: 30
-  CELERY_BEAT_SMILE: 86400
 
 heroku:
   AWS_LOCATION: "heroku"
   AWS_S3_REGION_NAME: "us-east-1"
   ALLOWED_HOSTS:
-    - .ksradau.herokuapp.com
+    - .colorin.herokuapp.com
     - 127.0.0.1
     - localhost
   DEBUG: false
   CELERY_BEAT_INVITATION: 900
   CELERY_BEAT_SMILE: 86400
-  SITE_ID: 1
-  TG: ""
-  TG_MATRIX: ""
+  SITE_ID: 2
 
 test:
   EMAIL_FROM: "test@test.name"
   DEBUG: 1
   SECRET_KEY: "1"
-  SITE_ID: 1
+  SITE_ID: 2
 
 
 travis:
   EMAIL_FROM: "test@test.name"
   DEBUG: 1
-  SECRET_KEY: "1"
-  SITE_ID: 1
-
-docker:
-  AWS_LOCATION: "docker"
-  AWS_S3_REGION_NAME: "us-east-1"
-  CELERY_BEAT_INVITATION: 30
-  CELERY_BEAT_SMILE: 86400
-  CELERY_BROKER_URL: "redis://ksradau-broker"
-  DATABASE_URL: "postgresql://ksradau:123@ksradau-db:5432/ksradau"
-  DEBUG: 0
   SECRET_KEY: "1"
   SITE_ID: 1

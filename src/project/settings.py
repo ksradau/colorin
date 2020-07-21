@@ -5,9 +5,9 @@ import dj_database_url
 from django.urls import reverse_lazy
 from dynaconf import settings as _settings
 
-PROJECT_DIR = Path(__file__).parent.resolve()  # project url
-BASE_DIR = PROJECT_DIR.parent.resolve()  # src url
-REPO_DIR = BASE_DIR.parent.resolve()  # repository url
+PROJECT_DIR = Path(__file__).parent.resolve()
+BASE_DIR = PROJECT_DIR.parent.resolve()
+REPO_DIR = BASE_DIR.parent.resolve()
 
 
 SECRET_KEY = _settings.SECRET_KEY
@@ -32,9 +32,7 @@ INSTALLED_APPS = [
     "apps.authorization.apps.AuthConfig",
     "apps.index",
     "apps.colorin",
-    "apps.blog.apps.BlogConfig",
     "rest_framework",
-    "apps.api",
     "rest_framework.authtoken",
     "drf_yasg",
 ]
@@ -56,7 +54,6 @@ ROOT_URLCONF = "project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.jinja2.Jinja2",
-        # тут рендер ищет имена
         "DIRS": [PROJECT_DIR / "jinja2",],
         "APP_DIRS": True,
         "OPTIONS": {

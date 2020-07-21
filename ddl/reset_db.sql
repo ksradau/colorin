@@ -1,1 +1,1 @@
-DROP DATABASE IF EXISTS "test_ksradau_base";
+DROP DATABASE IF EXISTS "test_colorin";
