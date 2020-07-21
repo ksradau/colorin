@@ -7,26 +7,17 @@
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap-grid.min.css">
     <link href="{{ static('style.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ static('favicon.ico') }}" rel="shortcut icon" type="image/png"/>
-    <title>{% block title %}{% endblock %}</title>
+    <title>Colorin App</title>
 </head>
 
 <body>
 <div class="marg">
     <header>
-        <a href="{{ url('index:index') }}"><img src="{{ static('logo.jpg') }}" alt="Logo" width="100px"/></a>
-        <nav>
-            {% with ns = request.resolver_match.namespace %}
-            <a class="nes-btn {% if ns == 'index' %}is-primary{% endif %}" href="{{ url('index:index') }}">About me</a>
-            <a class="nes-btn {% if ns == 'resume' %}is-primary{% endif %}" href="{{ url('resume:index') }}">Resume</a>
-            <a class="nes-btn {% if ns == 'education' %}is-primary{% endif %}" href="{{ url('education:index') }}">Education</a>
-            <a class="nes-btn {% if ns == 'contact' %}is-primary{% endif %}" href="{{ url('blog:all_posts') }}">Blog</a>
-            {% endwith %}
-        </nav>
+
     </header>
 </div>
 <main>
-    <h1>{% block header %}{% endblock %}</h1>
+    <h1>Colorin App for you</h1>
 
     {% block main %}{% endblock %}
 </main>
