@@ -1,6 +1,5 @@
 from django.views.generic import TemplateView
 
-from apps.index.models import MainPage
 from apps.index.models import UserInfo
 
 

@@ -33,8 +33,9 @@ gunicorn = "*"
 boto3 = "*"
 django-storages = "*"
 drf-yasg = "*"
-
+lxml = "*"
+beautifulsoup4 = "*"
+instapy = "*"
 
 [requires]
 python_version = "3.8"
-

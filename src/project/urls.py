@@ -9,6 +9,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("apps.index.urls")),
     path("colorin/", include("apps.colorin.urls")),
-    path("try-colorin/", include("apps.try-colorin.urls")),
     path("auth/", include("apps.authorization.urls")),
 ]
