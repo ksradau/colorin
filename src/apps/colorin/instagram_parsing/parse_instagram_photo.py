@@ -15,7 +15,4 @@ inst_list_of_photo = inst_user["edge_owner_to_timeline_media"]["edges"]
 
 inst_photo = [inst_list_of_photo[item]["node"]["display_url"] for item in range(11)]
 
-print(inst_profile_pic)
-print(inst_full_name)
-print(inst_biography)
-print(inst_photo)
+
