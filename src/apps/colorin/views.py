@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
-
-from apps.colorin.models import ColorinModel
+from django.shortcuts import render
+from apps.colorin.forms import ImageForm
 
 
 class IndexView(TemplateView):
@@ -9,7 +9,15 @@ class IndexView(TemplateView):
 
 class AllPhotoView(TemplateView):
     template_name = "colorin/all.html"
-    
 
-class AddPhotoView(TemplateView):
-    template_name = "colorin/add.html"
+
+def image_upload_view(request):
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            img_obj = form.instance
+            return render(request, 'colorin/add.html', {'form': form, 'img_obj': img_obj})
+    else:
+        form = ImageForm()
+    return render(request, 'colorin/add.html', {'form': form})
