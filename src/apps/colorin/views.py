@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from apps.colorin.forms import ImageForm
+from apps.authorization.models import Profile
 
 
 class IndexView(TemplateView):
@@ -14,6 +15,7 @@ class AllPhotoView(TemplateView):
 def image_upload_view(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
+        form.instance.user = Profile.objects.get(user=request.user)
         if form.is_valid():
             form.save()
             img_obj = form.instance

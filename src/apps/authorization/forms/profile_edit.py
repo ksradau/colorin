@@ -6,7 +6,7 @@ User = get_user_model()
 
 class ProfileEditForm(forms.Form):
     username = forms.CharField(max_length=200, required=True)
-    name = forms.CharField(max_length=1000, required=False)
+    inst_login = forms.CharField(max_length=1000, required=False)
 
     def clean_username(self):
         cleaned = self.cleaned_data["username"]

@@ -21,7 +21,6 @@ default:
   INST_PASSWORD: ""
 
 development:
-  AWS_LOCATION: "development"
   AWS_S3_REGION_NAME: "us-east-1"
   DEBUG: true
   SITE_ID: 2

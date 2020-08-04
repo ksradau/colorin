@@ -2,7 +2,7 @@ from django.db import models as m
 from django.contrib.auth import get_user_model
 import uuid
 from storages.backends.s3boto3 import S3Boto3Storage
-from authorization.models import Profile
+from apps.authorization.models import Profile
 
 User = get_user_model()
 

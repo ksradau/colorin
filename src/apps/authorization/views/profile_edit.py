@@ -28,7 +28,7 @@ class ProfileEditView(FormView):
         except User.profile.RelatedObjectDoesNotExist:
             profile = setup_profile(user)
 
-        profile.name = form.cleaned_data["name"]
+        profile.inst_login = form.cleaned_data["inst_login"]
         profile.save()
 
         return super().form_valid(form)
@@ -44,6 +44,6 @@ class ProfileEditView(FormView):
                 profile = None
 
             initial.update(
-                {"username": user.username, "name": profile.name if profile else "",}
+                {"username": user.username, "name": profile.inst_login if profile else "",}
             )
         return initial
