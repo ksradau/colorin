@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.shortcuts import render
 import requests
 #from apps.colorin.forms import ImageForm
@@ -15,8 +15,12 @@ class IndexView(TemplateView):
     template_name = "colorin/index.html"
 
 
-class AllPhotoView(TemplateView):
+class AllPhotoView(ListView):
+    model = UploadedPhoto
     template_name = "colorin/all.html"
+
+    def get_queryset(self):
+        return UploadedPhoto.objects.filter(user_id=self.request.user.id)
 
 
 class FileFieldView(FormView):
