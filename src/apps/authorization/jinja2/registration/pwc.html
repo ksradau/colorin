@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+{% if form.errors %}
+<p>Errors during changing password: {{form.errors}}</p>
+{% endif %}
+
+{% if next %}
+{% if user.is_authenticated %}
+<p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+{% else %}
+<p>Please login to see this page.</p>
+{% endif %}
+{% endif %}
+
+<form action="{{ url('password_change') }}" method="post">
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+   {{ form.as_p() }}
+
+    <input type="submit" value="Change password">
+    <input name="next" type="hidden" value="{{ next }}">
+</form>
+
+{% endblock %}
