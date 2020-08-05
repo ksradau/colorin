@@ -3,5 +3,11 @@
 {% block main %}
 <h1>All saved photos</h1>
 
+{% if uploaded.all() %}
+  <h3>Succesfully uploaded photos:</h3>
+{% for photo in uploaded.all() %}
+            <a href="{{ uploaded.photo.url }}"><img src="{{ uploaded.photo.url }}"></a>
+{% endfor %}
+{% endif %}
 
 {% endblock %}
