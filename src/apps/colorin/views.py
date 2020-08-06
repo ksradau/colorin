@@ -26,7 +26,7 @@ class AllPhotoView(ListView):
 class FileFieldView(FormView):
     form_class = FileFieldForm
     template_name = 'colorin/add.html'
-    success_url = ''
+    success_url = '/colorin/all/'
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
