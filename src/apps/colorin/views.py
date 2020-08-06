@@ -1,18 +1,25 @@
 from django.views.generic import TemplateView, ListView
 from django.shortcuts import render
 import requests
-#from apps.colorin.forms import ImageForm
+from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 
 from django.views.generic.edit import FormView
 from .forms import FileFieldForm
 from apps.colorin.models import UploadedPhoto
 
+from apps.colorin.parsing.info import get_info
+from apps.colorin.models import InstagramPhoto, InstagramProfile
+
 User = get_user_model()
 
 
 class IndexView(TemplateView):
     template_name = "colorin/index.html"
+    
+    #def get(self, request, *args, **kwargs):
+    #    get_info(request)
+    #    return HttpResponse()
 
 
 class AllPhotoView(ListView):
