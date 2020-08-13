@@ -3,5 +3,37 @@
 {% block main %}
 <h2>My Personal Cabinet</h2>
 
+<form method="post" enctype="multipart/form-data">
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+   {{ form.as_p() }}
+
+  <button class="nes-btn is-primary" type="submit">Update Info from Instagram</button>
+</form>
+
+<a href="{{ inst_profile_pic.url }}"><img src="{{ inst_profile_pic.photo.url }}" height="500px"></a>
+
+{% for item in object_list %}
+            <a href="{{ item.photo.url }}"><img src="{{ item.photo.url }}" height="200px"></a>
+{% endfor %}
+
+<a class="nes-btn is-warning" href="{{ url('colorin:add') }}">Add more shots</a>
+
+<h3>Your last match:</h3>
+
+{% if not object_list %}
+<p>Sorry, but you don't any suitable shots. Let's upload a little more!</p>
+{% else %}
+{% for item in object_list %}
+            <a href="{{ item.photo.url }}"><img src="{{ item.photo.url }}" height="200px"></a>
+{% endfor %}
+{% endif %}
+
+<form method="post" enctype="multipart/form-data">
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+   {{ form.as_p() }}
+
+  <button type="submit">Download match!</button>
+</form>
+
 
 {% endblock %}
