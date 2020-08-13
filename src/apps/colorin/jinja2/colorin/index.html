@@ -5,7 +5,7 @@
 
 <form method="post" enctype="multipart/form-data">
 <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-   {{ form.as_p() }}
+   {{ form.as_hidden() }}
   <button class="nes-btn is-primary" type="submit">Update Info from Instagram</button>
 </form>
 
@@ -34,7 +34,7 @@
 
 <form method="post" enctype="multipart/form-data">
 <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-   {{ form.as_p() }}
+   {{ form.as_hidden() }}
 
   <button type="submit">Download match!</button>
 </form>
