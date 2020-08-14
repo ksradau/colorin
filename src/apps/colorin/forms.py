@@ -12,8 +12,3 @@ class UpdateInfoForm(ModelForm):
         model = InstagramProfile
         widgets = {'any_field': HiddenInput(), }
 
-
-class DownLoadForm(ModelForm):
-    class Meta:
-        model = UploadedPhoto
-        widgets = {'any_field': HiddenInput(), }

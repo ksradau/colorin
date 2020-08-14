@@ -11,31 +11,19 @@ from apps.colorin.models import UploadedPhoto
 from apps.colorin.parsing.info import get_info
 from apps.colorin.models import InstagramPhoto, InstagramProfile
 import io
+from django.shortcuts import redirect
 
 User = get_user_model()
 
 
 class IndexView(TemplateView):
     template_name = "colorin/index.html"
-    form = 'update_info'
-    success_url = '/colorin/'
 
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
         context.update({"some_context_value": 'blah blah blah',
                         "some_other_context_value": 'blah'})
         return context
-
-    def update_info_form_valid(self, form):
-        get_info(request)
-        return form.update_info(self.request, redirect_url=self.get_success_url())
-
-    def update_download_form_valid(self, form):
-        return form.download_match(self.request, user, self.get_success_url())
-
-    #def get(self, request, *args, **kwargs):
-    #    get_info(request)
-    #    return HttpResponse()
 
 
 class AllPhotoView(ListView):
@@ -74,4 +62,10 @@ def download_zip(request):
     response['Content-Disposition'] = 'attachment; filename=%s' % 'my_zipfilename' + ".zip"
     response['Content-Length'] = zip_io.tell()
 
+    return response
+
+
+def update_info(request):
+    get_info(request)
+    response = redirect('/colorin/')
     return response

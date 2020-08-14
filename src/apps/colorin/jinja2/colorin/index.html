@@ -3,11 +3,7 @@
 
 <h2>My Personal Cabinet</h2>
 
-<form method="post" enctype="multipart/form-data">
-<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-   {{ form.as_hidden() }}
-  <button class="nes-btn is-primary" type="submit">Update Info from Instagram</button>
-</form>
+<a class="nes-btn is-primary" href="{{ url('colorin:update') }}">Update Info from Instagram</a>
 
 <a href="{{ inst_profile_pic.url }}"><img src="{{ inst_profile_pic.photo.url }}" height="500px"></a>
 
@@ -32,12 +28,8 @@
 {% endfor %}
 {% endif %}
 
-<form method="post" enctype="multipart/form-data">
-<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-   {{ form.as_hidden() }}
+<a class="nes-btn is-warning" href="{{ url('colorin:download') }}">Download match in ZIP!</a>
 
-  <button type="submit">Download match!</button>
-</form>
 
 
 {% endblock %}
