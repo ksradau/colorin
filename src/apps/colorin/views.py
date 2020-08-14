@@ -9,9 +9,12 @@ from .forms import FileFieldForm
 
 from apps.colorin.parsing.info import get_info
 from apps.colorin.models import InstagramPhoto, InstagramProfile, UploadedPhoto
-import io
+
 from django.shortcuts import redirect
+import io
 import zipfile
+from apps.colorin.palette.get import get_palette, get_dominant
+
 
 User = get_user_model()
 
@@ -49,14 +52,18 @@ class FileFieldView(FormView):
     form_class = FileFieldForm
     template_name = 'colorin/add.html'
     success_url = '/colorin/all/'
-
+    number_of_colors = 6
+    
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         files = request.FILES.getlist('file_field')
         if form.is_valid():
             for f in files:
-                uploaded = UploadedPhoto(user_id=request.user.id, photo=f)
+                uploaded = UploadedPhoto(user_id=request.user.id, 
+                                         photo=f, 
+                                         palette=get_palette(f, number_of_colors), 
+                                         dominant=get_dominant(f))
                 uploaded.save()
             return self.form_valid(form)
         else:

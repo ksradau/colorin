@@ -20,6 +20,8 @@ class InstagramPhoto(m.Model):
     uuid = m.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = m.ForeignKey(InstagramProfile, on_delete=m.CASCADE, related_name="instagram_photos")
     photo = m.FileField(storage=S3Boto3Storage())
+    palette = m.TextField(null=True, blank=True)
+    dominant = m.TextField(null=True, blank=True)
 
 
 class UploadedPhoto(m.Model):
@@ -27,3 +29,5 @@ class UploadedPhoto(m.Model):
     user = m.ForeignKey(User, on_delete=m.CASCADE, related_name="uploaded_photos")
     photo = m.FileField(storage=S3Boto3Storage())
     is_match = m.BooleanField(null=True, blank=True)
+    palette = m.TextField(null=True, blank=True)
+    dominant = m.TextField(null=True, blank=True)
