@@ -13,12 +13,6 @@ class UpdateInfoForm(ModelForm):
         widgets = {'any_field': HiddenInput(), }
 
 
-class UpdateIGPhotoForm(ModelForm):
-    class Meta:
-        model = InstagramPhoto
-        widgets = {'any_field': HiddenInput(), }
-
-
 class DownLoadForm(ModelForm):
     class Meta:
         model = UploadedPhoto

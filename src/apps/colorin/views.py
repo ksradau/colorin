@@ -5,40 +5,33 @@ from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 
 from django.views.generic.edit import FormView
-from .forms import FileFieldForm, UpdateInfoForm, UpdateIGPhotoForm, DownLoadForm
+from .forms import FileFieldForm, UpdateInfoForm, DownLoadForm
 from apps.colorin.models import UploadedPhoto
 
 from apps.colorin.parsing.info import get_info
 from apps.colorin.models import InstagramPhoto, InstagramProfile
+import io
 
 User = get_user_model()
 
 
-class IndexView(MultiFormsView):
+class IndexView(TemplateView):
     template_name = "colorin/index.html"
-    form_classes = {'update_info': UpdateInfoForm,
-                    'update_photo': UpdateIGPhotoForm,
-                    'download': DownLoadForm}
+    form = 'update_info'
     success_url = '/colorin/'
 
-    #def get_login_initial(self):
-        #return {'email': 'dave@dave.com'}
-
-    #def get_signup_initial(self):
-        #return {'email': 'dave@dave.com'}
-
     def get_context_data(self, **kwargs):
-        context = super(SignupLoginView, self).get_context_data(**kwargs)
+        context = super(TemplateView, self).get_context_data(**kwargs)
         context.update({"some_context_value": 'blah blah blah',
                         "some_other_context_value": 'blah'})
         return context
 
     def update_info_form_valid(self, form):
-        return form.login(self.request, redirect_url=self.get_success_url())
+        get_info(request)
+        return form.update_info(self.request, redirect_url=self.get_success_url())
 
-    def update_photo_form_valid(self, form):
-        user = form.save(self.request)
-        return form.signup(self.request, user, self.get_success_url())
+    def update_download_form_valid(self, form):
+        return form.download_match(self.request, user, self.get_success_url())
 
     #def get(self, request, *args, **kwargs):
     #    get_info(request)
@@ -69,3 +62,16 @@ class FileFieldView(FormView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+
+
+def download_zip(request):
+    zip_io = io.BytesIO()
+    with zipfile.ZipFile(zip_io, mode='w', compression=zipfile.ZIP_DEFLATED) as backup_zip:
+        for file_img in match_images_list:
+            backup_zip.write(file_img)
+
+    response = HttpResponse(zip_io.getvalue(), content_type='application/x-zip-compressed')
+    response['Content-Disposition'] = 'attachment; filename=%s' % 'my_zipfilename' + ".zip"
+    response['Content-Length'] = zip_io.tell()
+
+    return response
