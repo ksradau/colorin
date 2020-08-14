@@ -5,13 +5,13 @@ from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 
 from django.views.generic.edit import FormView
-from .forms import FileFieldForm, UpdateInfoForm, DownLoadForm
-from apps.colorin.models import UploadedPhoto
+from .forms import FileFieldForm
 
 from apps.colorin.parsing.info import get_info
-from apps.colorin.models import InstagramPhoto, InstagramProfile
+from apps.colorin.models import InstagramPhoto, InstagramProfile, UploadedPhoto
 import io
 from django.shortcuts import redirect
+import zipfile
 
 User = get_user_model()
 
@@ -20,10 +20,21 @@ class IndexView(TemplateView):
     template_name = "colorin/index.html"
 
     def get_context_data(self, **kwargs):
-        context = super(TemplateView, self).get_context_data(**kwargs)
-        context.update({"some_context_value": 'blah blah blah',
-                        "some_other_context_value": 'blah'})
-        return context
+        parent_ctx = super().get_context_data(**kwargs)
+
+        inst_profile = InstagramProfile.objects.filter(user_id=self.request.user.id).first()
+
+        if inst_profile is not None:
+
+            ctx = {"inst_biography": inst_profile.inst_biography,
+                   "inst_full_name": inst_profile.inst_full_name,
+                   "inst_profile_pic": inst_profile.inst_profile_pic,
+                   "instagram_photo_list": InstagramPhoto.objects.filter(user_id=self.request.user.id),
+                   "uploaded_photo_match_list": UploadedPhoto.objects.filter(user_id=self.request.user.id, is_match=True)}
+
+            ctx.update(parent_ctx)
+
+            return ctx
 
 
 class AllPhotoView(ListView):

@@ -3,33 +3,37 @@
 
 <h2>My Personal Cabinet</h2>
 
-<a class="nes-btn is-primary" href="{{ url('colorin:update') }}">Update Info from Instagram</a>
+<a class="nes-btn is-primary" href="{{ url('colorin:update') }}">Update from Instagram</a>
 
-<a href="{{ inst_profile_pic.url }}"><img src="{{ inst_profile_pic.photo.url }}" height="500px"></a>
+<a href="{{ inst_profile_pic.url }}"><img src="{{ inst_profile_pic.url }}" height="300px"></a>
 
-<p>IG Name: {{ user.username }}</p>
-<p>Bio: {{ inst_biography }}</p>
-<p>Full Name: {{ inst_full_name }}</p>
+<p>IG Name: <b>{{ user.username }}</b></p>
+{% if inst_biography %}
+<p>Bio: {{ inst_biography | safe }}</p>
+{% endif %}
+<p>Full Name: {{ inst_full_name | safe }}</p>
 
-
-{% for item in object_list %}
-            <a href="{{ item.photo.url }}"><img src="{{ item.photo.url }}" height="200px"></a>
-{% endfor %}
-
-<a class="nes-btn is-warning" href="{{ url('colorin:add') }}">Add more shots</a>
-
-<h3>Your last match:</h3>
-
-{% if not object_list %}
-<p>Sorry, but you don't any suitable shots. Let's upload a little more!</p>
+{% if not instagram_photo_list %}
+<p>Oh, there are not images from Instagram. Add something in your IG profile and update info by button at the top.</p>
 {% else %}
-{% for item in object_list %}
+{% for item in instagram_photo_list %}
             <a href="{{ item.photo.url }}"><img src="{{ item.photo.url }}" height="200px"></a>
 {% endfor %}
 {% endif %}
 
-<a class="nes-btn is-warning" href="{{ url('colorin:download') }}">Download match in ZIP!</a>
+<a class="nes-btn is-warning" href="{{ url('colorin:file_field') }}">Add your shots</a>
 
+<br/><br/>
+<h3>Your last match:</h3>
+
+{% if not uploaded_photo_match_list %}
+<p>Sorry, but you don't any suitable shots for your IG Profile. Let's upload a little more!</p>
+{% else %}
+{% for item in uploaded_photo_match_list %}
+            <a href="{{ item.photo.url }}"><img src="{{ item.photo.url }}" height="200px"></a>
+{% endfor %}
+<a class="nes-btn is-warning" href="{{ url('colorin:download') }}">Download match in ZIP!</a>
+{% endif %}
 
 
 {% endblock %}

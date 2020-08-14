@@ -18,7 +18,7 @@ def get_info(request):
     inst_profile_pic = inst_user["profile_pic_url_hd"]
     inst_full_name = inst_user["full_name"]
     inst_biography = inst_user["biography"]
-
+        
     lf = save_images(inst_profile_pic)
     file_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8)) + '.jpg'
 
@@ -29,7 +29,10 @@ def get_info(request):
 
     inst_list_of_photo = inst_user["edge_owner_to_timeline_media"]["edges"]
 
-    inst_photo = [inst_list_of_photo[item]["node"]["display_url"] for item in range(11)]
+    inst_photo = [inst_list_of_photo[item]["node"]["display_url"] for item in range(10)]
+
+    if InstagramPhoto.objects.filter(user_id=request.user.id).exists():
+        InstagramPhoto.objects.filter(user_id=request.user.id).delete()
 
     for photo_url in inst_photo:
         lf = save_images(photo_url)
