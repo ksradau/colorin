@@ -59,6 +59,7 @@ class FileFieldView(FormView):
         form = self.get_form(form_class)
         files = request.FILES.getlist('file_field')
         if form.is_valid():
+            number_of_colors = 6
             for f in files:
                 uploaded = UploadedPhoto(user_id=request.user.id, 
                                          photo=f, 
