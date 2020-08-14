@@ -32,6 +32,7 @@ class IndexView(TemplateView):
             ctx = {"inst_biography": inst_profile.inst_biography,
                    "inst_full_name": inst_profile.inst_full_name,
                    "inst_profile_pic": inst_profile.inst_profile_pic,
+                   "inst_theme_color": inst_profile.inst_theme_color[1:-1],
                    "instagram_photo_list": InstagramPhoto.objects.filter(user_id=self.request.user.id),
                    "uploaded_photo_match_list": UploadedPhoto.objects.filter(user_id=self.request.user.id, is_match=True)}
 

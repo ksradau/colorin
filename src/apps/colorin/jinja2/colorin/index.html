@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block main %}
 
+<style>
+   body { background-color: rgb({{ inst_theme_color }}); }
+</style>
+
 <h2>My Personal Cabinet</h2>
 
 <a class="nes-btn is-primary" href="{{ url('colorin:update') }}">Update from Instagram</a>
