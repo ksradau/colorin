@@ -7,7 +7,7 @@
 
 <h2>My Personal Cabinet</h2>
 
-<a class="nes-btn is-primary" href="{{ url('colorin:update') }}">Update from Instagram</a>
+<a class="nes-btn" href="{{ url('colorin:update') }}">Update from Instagram</a>
 
 <a href="{{ inst_profile_pic.url }}"><img src="{{ inst_profile_pic.url }}" height="300px"></a>
 
@@ -25,9 +25,10 @@
 {% endfor %}
 {% endif %}
 
-<a class="nes-btn is-warning" href="{{ url('colorin:file_field') }}">Add your shots</a>
+<a class="nes-btn is-warning" href="{{ url('colorin:file_field') }}">Add your shots</a><br/>
+<a class="nes-btn" href="{{ url('colorin:colorin-all') }}">See all uploaded</a>
 
-<br/><br/>
+<br/><br/><br/>
 <h3>Your last match:</h3>
 
 {% if not uploaded_photo_match_list %}

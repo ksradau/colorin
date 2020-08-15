@@ -13,7 +13,22 @@
 <body>
 <div class="marg">
     <header>
-
+        <a href="{{ url('index:index') }}"><img src="{{ static('logo1.png') }}" alt="Logo" width="350px"/></a>
+        <nav>
+            {% with ns = request.resolver_match.namespace %}
+            <a class="nes-btn {% if ns == 'index' %}is-warning{% endif %}" href="{{ url('index:index') }}">Main</a>
+            {% if not user.is_authenticated %}
+            <a class="nes-btn {% if ns == 'authorization' %}is-warning{% endif %}" href="{{ url('login') }}">Login</a>
+            <a class="nes-btn {% if ns == 'authorization' %}is-warning{% endif %}" href="{{ url('signup') }}">Sign Up</a>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <a class="nes-btn {% if ns == 'colorin' %}is-warning{% endif %}" href="{{ url('colorin:index') }}">Personal</a>
+            <a class="nes-btn {% if ns == 'colorin' %}is-warning{% endif %}" href="{{ url('colorin:colorin-all') }}">All Uploaded</a>
+            <a class="nes-btn {% if ns == 'authorization' %}is-warning{% endif %}" href="{{ url('password_change') }}">Password Change</a>
+            <a class="nes-btn {% if ns == 'authorization' %}is-warning{% endif %}" href="{{ url('logout') }}">Logout</a>
+            {% endif %}
+            {% endwith %}
+        </nav>
     </header>
 </div>
 <main>
