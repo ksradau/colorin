@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
-from apps.colorin.parsing.info import get_info
+from apps.colorin.parsing.info import create_profile
 
 User = get_user_model()
 
@@ -38,5 +38,5 @@ class SignUpView(FormView):
 
         user = authenticate(self.request, username=username, password=password)
         login(self.request, user)
-        get_info(self.request)
+        create_profile(self.request)
         return super().form_valid(form)

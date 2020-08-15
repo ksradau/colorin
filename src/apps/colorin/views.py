@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from django.views.generic.edit import FormView
 from .forms import FileFieldForm
 
-from apps.colorin.parsing.info import get_info
+from apps.colorin.parsing.info import create_profile, update_profile
 from apps.colorin.models import InstagramPhoto, InstagramProfile, UploadedPhoto
 
 from django.shortcuts import redirect
@@ -86,6 +86,12 @@ def download_zip(request):
 
 
 def update_info(request):
-    get_info(request)
+    update_profile(request)
+    response = redirect('/colorin/')
+    return response
+
+
+def update_info_first(request):
+    create_profile(request)
     response = redirect('/colorin/')
     return response

@@ -7,8 +7,17 @@ import random
 import string
 from apps.colorin.palette.get import get_palette, get_dominant
 
-
+"""
 def get_info(request):
+    if InstagramProfile.objects.filter(user_id=request.user.id).exists():
+        return update_profile(request)
+    elif not InstagramProfile.objects.filter(user_id=request.user.id).exists():
+        return create_profile(request)
+"""
+
+def update_profile(request):
+    print("Profile already exists, start update process")
+
     url = "https://www.instagram.com/" + request.user.username + "/?__a=1"
 
     r = requests.get(url, headers={
@@ -24,14 +33,6 @@ def get_info(request):
     inst_list_of_photo = inst_user["edge_owner_to_timeline_media"]["edges"]
     inst_photo = [inst_list_of_photo[item]["node"]["display_url"] for item in range(10)]
 
-    if InstagramProfile.objects.filter(user_id=request.user.id).exists():
-        return update_profile(request, inst_full_name, inst_biography, inst_profile_pic_url, inst_photo)
-    elif not InstagramProfile.objects.filter(user_id=request.user.id).exists():
-        return create_profile(request, inst_full_name, inst_biography, inst_profile_pic_url, inst_photo)
-
-
-def update_profile(request, inst_full_name, inst_biography, inst_profile_pic_url, inst_photo):
-    print("Profile already exists, start update")
     inst_profile = InstagramProfile.objects.get(user_id=request.user.id)
     value_of_inst_full_name = inst_profile.inst_full_name
     value_of_inst_biography = inst_profile.inst_biography
@@ -91,8 +92,24 @@ def update_profile(request, inst_full_name, inst_biography, inst_profile_pic_url
             print("Update - old photo deleted")
 
 
-def create_profile(request, inst_full_name, inst_biography, inst_profile_pic_url, inst_photo):
+def create_profile(request):
     print("Profile DO NOT exists")
+
+    url = "https://www.instagram.com/" + request.user.username + "/?__a=1"
+
+    r = requests.get(url, headers={
+        'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"})
+    instagram_json = r.json()
+
+    inst_user = instagram_json["graphql"]["user"]
+    inst_profile_pic = inst_user["profile_pic_url_hd"]
+    inst_full_name = inst_user["full_name"]
+    inst_biography = inst_user["biography"]
+    inst_profile_pic_url = inst_profile_pic
+
+    inst_list_of_photo = inst_user["edge_owner_to_timeline_media"]["edges"]
+    inst_photo = [inst_list_of_photo[item]["node"]["display_url"] for item in range(10)]
+
     lf = save_images(inst_profile_pic_url)
     file_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8)) + '.jpg'
 
