@@ -5,12 +5,18 @@ import dj_database_url
 from django.urls import reverse_lazy
 from dynaconf import settings as _settings
 
+from django.contrib.auth import get_user_model
+import requests
+
+
+
 PROJECT_DIR = Path(__file__).parent.resolve()
 BASE_DIR = PROJECT_DIR.parent.resolve()
 REPO_DIR = BASE_DIR.parent.resolve()
 
 
 SECRET_KEY = _settings.SECRET_KEY
+
 
 DEBUG = _settings.DEBUG
 
@@ -137,24 +143,14 @@ STATIC_ROOT = (
 STATIC_URL = "/static/"
 
 
-LOGIN_URL = reverse_lazy("authorization:sign_in")
-LOGIN_REDIRECT_URL = reverse_lazy("authorization:me")
+LOGIN_URL = reverse_lazy("login")
+LOGIN_REDIRECT_URL = reverse_lazy("colorin:index")
 
 SITE_ID = _settings.SITE_ID
-
-EMAIL_HOST = _settings.EMAIL_HOST
-EMAIL_HOST_PASSWORD = _settings.EMAIL_HOST_PASSWORD
-EMAIL_HOST_USER = _settings.EMAIL_HOST_USER
-EMAIL_PORT = _settings.EMAIL_PORT
-EMAIL_USE_SSL = _settings.EMAIL_USE_SSL
-EMAIL_USE_TLS = _settings.EMAIL_USE_TLS
-
-EMAIL_FROM = _settings.EMAIL_FROM
 
 
 AWS_ACCESS_KEY_ID = _settings.AWS_ACCESS_KEY_ID
 AWS_DEFAULT_ACL = "public-read"
-
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_ADDRESSING_STYLE = "path"
 AWS_S3_REGION_NAME = _settings.AWS_S3_REGION_NAME

@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h1>All saved photos</h1>
+<h2>All saved images</h2>
 
+{% if not object_list %}
+<p>Sorry, but you don't upload images for analysing. Just do it now!</p>
+{% else %}
+{% for item in object_list %}
+            <a href="{{ item.photo.url }}"><img src="{{ item.photo.url }}" height="300px"></a>
+{% endfor %}
+{% endif %}
 
 {% endblock %}

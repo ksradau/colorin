@@ -1,3 +1,0 @@
-Smile!
-Soon it will be over.
-{{ time_left }} left before freedom.

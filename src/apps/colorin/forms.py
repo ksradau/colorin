@@ -1,8 +1,7 @@
 from django import forms
-from .models import UploadedPhoto
+from django.forms import HiddenInput, ModelForm
+from apps.colorin.models import InstagramPhoto, InstagramProfile, UploadedPhoto
 
 
-class ImageForm(forms.ModelForm):
-    class Meta:
-        model = UploadedPhoto
-        fields = ('photo',)
+class FileFieldForm(forms.Form):
+    file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
