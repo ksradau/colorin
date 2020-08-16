@@ -7,13 +7,6 @@ import random
 import string
 from apps.colorin.palette.get import get_palette, get_dominant
 
-"""
-def get_info(request):
-    if InstagramProfile.objects.filter(user_id=request.user.id).exists():
-        return update_profile(request)
-    elif not InstagramProfile.objects.filter(user_id=request.user.id).exists():
-        return create_profile(request)
-"""
 
 def update_profile(request):
     print("Profile already exists, start update process")
@@ -31,7 +24,13 @@ def update_profile(request):
     inst_profile_pic_url = inst_profile_pic
 
     inst_list_of_photo = inst_user["edge_owner_to_timeline_media"]["edges"]
-    inst_photo = [inst_list_of_photo[item]["node"]["display_url"] for item in range(10)]
+
+    inst_photo = []
+    for item in range(10):
+        try:
+            inst_photo.append(inst_list_of_photo[item]["node"]["display_url"])
+        except IndexError:
+            pass
 
     inst_profile = InstagramProfile.objects.get(user_id=request.user.id)
     value_of_inst_full_name = inst_profile.inst_full_name
@@ -108,7 +107,13 @@ def create_profile(request):
     inst_profile_pic_url = inst_profile_pic
 
     inst_list_of_photo = inst_user["edge_owner_to_timeline_media"]["edges"]
-    inst_photo = [inst_list_of_photo[item]["node"]["display_url"] for item in range(10)]
+
+    inst_photo = []
+    for item in range(10):
+        try:
+            inst_photo.append(inst_list_of_photo[item]["node"]["display_url"])
+        except IndexError:
+            pass
 
     lf = save_images(inst_profile_pic_url)
     file_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8)) + '.jpg'
