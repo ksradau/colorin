@@ -13,7 +13,7 @@ from apps.colorin.models import InstagramPhoto, InstagramProfile, UploadedPhoto
 from django.shortcuts import redirect
 import io
 import zipfile
-from apps.colorin.palette.get import get_palette, get_dominant
+from apps.colorin.palette.get import get_palette
 
 
 User = get_user_model()
@@ -62,10 +62,12 @@ class FileFieldView(FormView):
         if form.is_valid():
             number_of_colors = 6
             for f in files:
+                palette = get_palette(f, number_of_colors)
+                dominant = palette[0]
                 uploaded = UploadedPhoto(user_id=request.user.id, 
                                          photo=f, 
-                                         palette=get_palette(f, number_of_colors), 
-                                         dominant=get_dominant(f))
+                                         palette=palette,
+                                         dominant=dominant)
                 uploaded.save()
             return self.form_valid(form)
         else:

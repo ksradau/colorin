@@ -5,7 +5,7 @@ from apps.colorin.parsing.images import save_images
 from django.core import files
 import random
 import string
-from apps.colorin.palette.get import get_palette, get_dominant
+from apps.colorin.palette.get import get_palette
 
 
 def update_profile(request):
@@ -56,7 +56,9 @@ def update_profile(request):
         lf = save_images(inst_profile_pic_url)
         file_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8)) + '.jpg'
 
-        inst_profile.inst_theme_color = get_dominant(lf)
+        palette = get_palette(lf, 2)
+        inst_theme_color = palette[0]
+        inst_profile.inst_theme_color = inst_theme_color
 
         inst_profile.inst_profile_pic.save(file_name, files.File(lf))
     else:
@@ -74,10 +76,14 @@ def update_profile(request):
             lf = save_images(photo_url)
             file_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8)) + '.jpg'
 
+            palette = get_palette(lf, number_of_colors)
+            dominant = palette[0]
+
             inst_img = InstagramPhoto(user_id=request.user.id,
                                       photo_url=photo_url,
-                                      palette=get_palette(lf, number_of_colors),
-                                      dominant=get_dominant(lf))
+                                      palette=palette,
+                                      dominant=dominant,)
+
             inst_img.photo.save(file_name, files.File(lf))
             inst_img.save()
             print("Update - new photo from new url saved")
@@ -118,7 +124,8 @@ def create_profile(request):
     lf = save_images(inst_profile_pic_url)
     file_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8)) + '.jpg'
 
-    inst_theme_color = get_dominant(lf)
+    palette = get_palette(lf, 2)
+    inst_theme_color = palette[0]
 
     inst_profile = InstagramProfile(user_id=request.user.id, inst_full_name=inst_full_name,
                                     inst_biography=inst_biography, inst_theme_color=inst_theme_color,
@@ -135,10 +142,13 @@ def create_profile(request):
         lf = save_images(url)
         file_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8)) + '.jpg'
 
+        palette = get_palette(lf, number_of_colors)
+        dominant = palette[0]
+
         inst_img = InstagramPhoto(user_id=request.user.id,
                                   photo_url=url,
-                                  palette=get_palette(lf, number_of_colors),
-                                  dominant=get_dominant(lf))
+                                  palette=palette,
+                                  dominant=dominant,)
         inst_img.photo.save(file_name, files.File(lf))
         inst_img.save()
         print("Photo from IG saved (first iteration)")
