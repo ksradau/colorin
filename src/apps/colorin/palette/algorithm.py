@@ -17,14 +17,23 @@ def is_similar(rgb1, rgb2):
 
 
 def get_similar_array(color):
-    T = 20
+    T = 20 + 1
+    tolerance_list = []
     r, g, b = color[0], color[1], color[2]
-    for rn, gn, bn in (range(r - T, r + T), range(g - T, g + T), range(b - T, b + T)):
-        if 
+    for rn in range(r - T, r + T):
+        for gn in range(g - T, g + T):
+            for bn in range(b - T, b + T):
+                tolerance_list.append((rn, gn, bn,))
+    return tolerance_list
 
-test_list_of_inst_colors = get_palette('examples/ex1.jpg', 10)
 
-palette_first_test_uploaded = get_palette('examples/ex2.jpg', 10)
-palette_second_test_uploaded = get_palette('examples/ex3.jpg', 10)
+test_list_of_inst_colors = get_palette('examples\ex1.jpg', 6)
+
+palette_first_test_uploaded = get_palette('examples\ex2.jpg', 6)
+palette_second_test_uploaded = get_palette('examples\ex3.jpg', 6)
 
 test_uploaded_list = palette_first_test_uploaded + palette_second_test_uploaded
+
+similar_array_for_inst_palette = get_similar_array((150, 40, 90))
+
+print(similar_array_for_inst_palette)
