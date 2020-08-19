@@ -36,6 +36,7 @@ drf-yasg = "*"
 lxml = "*"
 beautifulsoup4 = "*"
 instapy = "*"
+numpy = "*"
 
 [requires]
 python_version = "3.8"
