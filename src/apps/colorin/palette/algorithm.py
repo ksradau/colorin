@@ -32,7 +32,7 @@ def get_similar_array(color):
                 tolerance_list.append((abs(rn), abs(gn), abs(bn),))
     return set(tolerance_list)
 
-
+"""
 test_list_of_inst_colors = get_palette('examples\ex1.jpg', 6)
 
 palette_first_test_uploaded = get_palette('examples\ex2.jpg', 6)
@@ -46,15 +46,21 @@ for color in test_list_of_inst_colors:
     _all.append(similar_array_for_inst_palette)
 
 print(_all)
+"""
 
-match_counter = 0
+_all = [(1, 2, 3), (4, 2, 3), (1, 6, 3), (2, 2, 2), (4, 4, 4), (1, 6, 3)]
+one = [(1, 4, 3), (4, 2, 3), (1, 6, 3)]
+two = [(2, 2, 2), (4, 5, 3), (1, 16, 3)]
+
+test_uploaded_list = [one, two]
+
 for img in test_uploaded_list:
+    match_counter = 0
     for palette in img:
-        for color in palette:
-            if color in _all:
-                match_counter += 1
-                print("~~~ It's a MATCH !!!")
-            else:
-                print("~~~ Oh no")
-    print("~~~ Num of matches:")
+        if palette in _all:
+            match_counter += 1
+            print("~~~ It's a MATCH !!!")
+        else:
+            print("~~~ Oh no")
+    print("~~~ Num of matches in img:")
     print(match_counter)
