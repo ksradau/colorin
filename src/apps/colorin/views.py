@@ -14,6 +14,7 @@ from django.shortcuts import redirect
 import io
 import zipfile
 from apps.colorin.palette.get import get_palette
+from apps.colorin.palette.match import match
 
 
 User = get_user_model()
@@ -95,5 +96,11 @@ def update_info(request):
 
 def update_info_first(request):
     create_profile(request)
+    response = redirect('/colorin/')
+    return response
+
+
+def match_image(request):
+    match(request)
     response = redirect('/colorin/')
     return response
