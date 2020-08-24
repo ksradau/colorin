@@ -6,6 +6,7 @@ from django.core import files
 import random
 import string
 from apps.colorin.palette.get import get_palette
+from apps.colorin.palette.match import get_similar_of_all_img_colors
 
 
 def update_profile(request):
@@ -78,11 +79,13 @@ def update_profile(request):
 
             palette = get_palette(lf, number_of_colors)
             dominant = palette[0]
+            similar = get_similar_of_all_img_colors(palette)
 
             inst_img = InstagramPhoto(user_id=request.user.id,
                                       photo_url=photo_url,
                                       palette=palette,
-                                      dominant=dominant,)
+                                      dominant=dominant,
+                                      similar=similar,)
 
             inst_img.photo.save(file_name, files.File(lf))
             inst_img.save()
@@ -144,11 +147,14 @@ def create_profile(request):
 
         palette = get_palette(lf, number_of_colors)
         dominant = palette[0]
+        similar = get_similar_of_all_img_colors(palette)
 
         inst_img = InstagramPhoto(user_id=request.user.id,
                                   photo_url=url,
                                   palette=palette,
-                                  dominant=dominant,)
+                                  dominant=dominant,
+                                  similar=similar,)
+
         inst_img.photo.save(file_name, files.File(lf))
         inst_img.save()
         print("Photo from IG saved (first iteration)")
