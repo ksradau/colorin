@@ -29,16 +29,18 @@
 <a class="nes-btn" href="{{ url('colorin:colorin-all') }}">See all uploaded</a>
 
 <br/><br/><br/>
-<h3>Your last match:</h3>
+<h2>My last match:</h2>
+<br/><br/>
 
 {% if not uploaded_photo_match_list %}
-<p>Sorry, but you don't any suitable shots for your IG Profile. Let's upload a little more!</p>
+<p>Sorry, but you don't any suitable shots for your IG Profile. Let's upload a little more and press MATCH button!</p>
 {% else %}
 {% for item in uploaded_photo_match_list %}
             <a href="{{ item.photo.url }}"><img src="{{ item.photo.url }}" height="200px"></a>
 {% endfor %}
-<a class="nes-btn is-warning" href="{{ url('colorin:download') }}">Download match in ZIP!</a>
+<a class="nes-btn is-warning" href="{{ url('colorin:download') }}">Download last match in ZIP!</a>
 {% endif %}
-
+<br/><br/>
+<a class="nes-btn is-warning" href="{{ url('colorin:match') }}">~ MATCH! ~</a><br/><br/>
 
 {% endblock %}
