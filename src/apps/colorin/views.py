@@ -15,6 +15,7 @@ import io
 import zipfile
 from apps.colorin.palette.get import get_palette
 from apps.colorin.palette.match import match
+import os.path
 
 
 User = get_user_model()
@@ -77,9 +78,10 @@ class FileFieldView(FormView):
 
 def download_zip(request):
     zip_io = io.BytesIO()
+    match_images_list = UploadedPhoto.objects.filter(user_id=request.user.id, is_match=True).all()
     with zipfile.ZipFile(zip_io, mode='w', compression=zipfile.ZIP_DEFLATED) as backup_zip:
         for file_img in match_images_list:
-            backup_zip.write(file_img)
+            backup_zip.write(file_img.photo.storage)   #fix this
 
     response = HttpResponse(zip_io.getvalue(), content_type='application/x-zip-compressed')
     response['Content-Disposition'] = 'attachment; filename=%s' % 'my_zipfilename' + ".zip"
