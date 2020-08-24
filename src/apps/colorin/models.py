@@ -24,6 +24,7 @@ class InstagramPhoto(m.Model):
     photo_url = m.TextField(null=True, blank=True)
     palette = m.TextField(null=True, blank=True)
     dominant = m.TextField(null=True, blank=True)
+    similar = m.TextField(null=True, blank=True)
 
 
 class UploadedPhoto(m.Model):
