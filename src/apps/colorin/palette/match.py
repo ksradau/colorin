@@ -28,6 +28,7 @@ def match(request):
         else:
             img.is_match = False
             print("is_match field FALSE")
+        img.save()
 
 
 def get_similar_of_all_img_colors(palette):

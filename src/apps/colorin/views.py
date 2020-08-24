@@ -100,7 +100,7 @@ def update_info_first(request):
     return response
 
 
-def match_image(request):
+def match_images(request):
     match(request)
     response = redirect('/colorin/')
     return response
