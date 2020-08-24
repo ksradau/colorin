@@ -17,7 +17,7 @@ def is_similar(rgb1, rgb2):
 
 
 def get_similar_array(color):
-    T = 20
+    T = 15
     tolerance_list = []
     r, g, b = color[0], color[1], color[2]
     for rn in range(r - T, r + T):
@@ -32,18 +32,17 @@ def get_similar_array(color):
                 tolerance_list.append((abs(rn), abs(gn), abs(bn),))
     return set(tolerance_list)
 
-"""
-test_list_of_inst_colors = get_palette('examples\ex1.jpg', 6)
+test_list_of_inst_colors = get_palette('examples\китч.png', 10)
 
-palette_first_test_uploaded = get_palette('examples\ex2.jpg', 6)
-palette_second_test_uploaded = get_palette('examples\ex3.jpg', 6)
+palette_first_test_uploaded = get_palette('examples\календарь.png', 10)
+palette_second_test_uploaded = get_palette('examples\ex3.jpg', 10)
 
 test_uploaded_list = [palette_first_test_uploaded, palette_second_test_uploaded]
 
 _all = []
 for color in test_list_of_inst_colors:
     similar_array_for_inst_palette = get_similar_array(color)
-    _all.append(similar_array_for_inst_palette)
+    _all += similar_array_for_inst_palette
 
 print(_all)
 """
@@ -53,6 +52,7 @@ one = [(1, 4, 3), (4, 2, 3), (1, 6, 3)]
 two = [(2, 2, 2), (4, 5, 3), (1, 16, 3)]
 
 test_uploaded_list = [one, two]
+"""
 
 for img in test_uploaded_list:
     match_counter = 0
