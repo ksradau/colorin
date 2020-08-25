@@ -16,7 +16,11 @@ import zipfile
 from apps.colorin.palette.get import get_palette
 from apps.colorin.palette.match import match
 import os.path
-
+from apps.colorin.parsing.images import save_images
+import random
+import string
+import tempfile
+from django.core import files
 
 User = get_user_model()
 
@@ -81,10 +85,19 @@ def download_zip(request):
     match_images_list = UploadedPhoto.objects.filter(user_id=request.user.id, is_match=True).all()
     with zipfile.ZipFile(zip_io, mode='w', compression=zipfile.ZIP_DEFLATED) as backup_zip:
         for file_img in match_images_list:
-            backup_zip.write(file_img.photo.storage)   #fix this
+
+            request = requests.get(file_img.photo.url, stream=True)
+            lf = tempfile.NamedTemporaryFile(delete=False, suffix='.jpg')
+            for block in request.iter_content(1024 * 8):
+                if not block:
+                    break
+                lf.write(block)
+            lf.seek(0)
+            backup_zip.write(lf.name)
+
 
     response = HttpResponse(zip_io.getvalue(), content_type='application/x-zip-compressed')
-    response['Content-Disposition'] = 'attachment; filename=%s' % 'my_zipfilename' + ".zip"
+    response['Content-Disposition'] = 'attachment; filename=%s' % 'last_zip_match' + ".zip"
     response['Content-Length'] = zip_io.tell()
 
     return response
