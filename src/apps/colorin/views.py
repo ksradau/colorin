@@ -87,13 +87,14 @@ def download_zip(request):
         for file_img in match_images_list:
 
             request = requests.get(file_img.photo.url, stream=True)
-            lf = tempfile.NamedTemporaryFile(delete=False)
+            lf = tempfile.NamedTemporaryFile(delete=False, suffix='.jpg')
             for block in request.iter_content(1024 * 8):
                 if not block:
                     break
                 lf.write(block)
-                lf.seek(0)
-            backup_zip.write(lf.name)     #fix this
+            lf.seek(0)
+            backup_zip.write(lf.name)
+
 
     response = HttpResponse(zip_io.getvalue(), content_type='application/x-zip-compressed')
     response['Content-Disposition'] = 'attachment; filename=%s' % 'last_zip_match' + ".zip"
