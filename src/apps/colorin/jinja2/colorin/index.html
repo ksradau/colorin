@@ -15,7 +15,9 @@
 {% if inst_biography %}
 <p>Bio: {{ inst_biography | safe }}</p>
 {% endif %}
+{% if inst_full_name %}
 <p>Full Name: {{ inst_full_name | safe }}</p>
+{% endif %}
 
 {% if not instagram_photo_list %}
 <p>Oh, there are not images from Instagram. Add something in your IG profile and update info by button at the top.</p>
