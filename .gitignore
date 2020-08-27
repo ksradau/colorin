@@ -1,6 +1,7 @@
 Pipfile.lock
 .idea/
 .static/
+output.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
