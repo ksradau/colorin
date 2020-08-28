@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from apps.colorin.models import InstagramPhoto, UploadedPhoto
+from apps.colorin.models import InstagramPhoto, UploadedPhoto, EmojiPic
 import requests
 
 
@@ -30,6 +30,8 @@ def match(request):
             print("is_match field FALSE")
         img.save()
 
+    emoji_match(request)
+
 
 def get_similar_of_all_img_colors(palette):
     _all = []
@@ -54,3 +56,19 @@ def get_similar_of_one_color(color):
                     bn = 255
                 tolerance_list.append((abs(rn), abs(gn), abs(bn),))
     return set(tolerance_list)
+
+
+def emoji_match(request):
+    emoji_pic_queryset = UploadedPhoto.objects.filter(user_id=request.user.id).all()
+    for pic in emoji_pic_queryset:
+        match_counter = 0
+        palette = eval(pic.similar)
+        for color in palette:
+            if color in all_colors_array:
+                match_counter += 1
+
+        if match_counter > 4:
+            pic.is_match = True
+        else:
+            pic.is_match = False
+        pic.save()
