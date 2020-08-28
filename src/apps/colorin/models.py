@@ -34,3 +34,10 @@ class UploadedPhoto(m.Model):
     is_match = m.BooleanField(null=True, blank=True)
     palette = m.TextField(null=True, blank=True)
     dominant = m.TextField(null=True, blank=True)
+
+
+class EmojiPic(m.Model):
+    emoji_name = m.TextField(null=True, blank=True)
+    is_match = m.BooleanField(null=True, blank=True)
+    dominant = m.TextField(null=True, blank=True)
+    similar = m.TextField(null=True, blank=True)
