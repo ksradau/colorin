@@ -41,7 +41,9 @@ class IndexView(TemplateView):
                    "inst_profile_pic": inst_profile.inst_profile_pic,
                    "inst_theme_color": inst_profile.inst_theme_color[1:-1],
                    "instagram_photo_list": InstagramPhoto.objects.filter(user_id=self.request.user.id),
-                   "uploaded_photo_match_list": UploadedPhoto.objects.filter(user_id=self.request.user.id, is_match=True)}
+                   "uploaded_photo_match_list": UploadedPhoto.objects.filter(user_id=self.request.user.id, is_match=True),
+                   "emoji_match_list": EmojiPic.objects.filter(is_match=True),
+                   }
 
             ctx.update(parent_ctx)
 
