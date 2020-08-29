@@ -8,7 +8,7 @@ from django.views.generic.edit import FormView
 from .forms import FileFieldForm
 
 from apps.colorin.parsing.info import create_profile, update_profile
-from apps.colorin.models import InstagramPhoto, InstagramProfile, UploadedPhoto
+from apps.colorin.models import InstagramPhoto, InstagramProfile, UploadedPhoto, EmojiPic
 
 from django.shortcuts import redirect
 import io
@@ -21,6 +21,7 @@ import random
 import string
 import tempfile
 from django.core import files
+from apps.colorin.parsing.emoji_parsing import add_emoji
 
 User = get_user_model()
 
@@ -40,7 +41,9 @@ class IndexView(TemplateView):
                    "inst_profile_pic": inst_profile.inst_profile_pic,
                    "inst_theme_color": inst_profile.inst_theme_color[1:-1],
                    "instagram_photo_list": InstagramPhoto.objects.filter(user_id=self.request.user.id),
-                   "uploaded_photo_match_list": UploadedPhoto.objects.filter(user_id=self.request.user.id, is_match=True)}
+                   "uploaded_photo_match_list": UploadedPhoto.objects.filter(user_id=self.request.user.id, is_match=True),
+                   "emoji_match_list": eval(inst_profile.emoji_match_list),
+                   }
 
             ctx.update(parent_ctx)
 
@@ -95,7 +98,6 @@ def download_zip(request):
             lf.seek(0)
             backup_zip.write(lf.name)
 
-
     response = HttpResponse(zip_io.getvalue(), content_type='application/x-zip-compressed')
     response['Content-Disposition'] = 'attachment; filename=%s' % 'last_zip_match' + ".zip"
     response['Content-Length'] = zip_io.tell()
@@ -117,5 +119,11 @@ def update_info_first(request):
 
 def match_images(request):
     match(request)
+    response = redirect('/colorin/')
+    return response
+
+
+def add_emoji_to_db(request):
+    add_emoji(request)
     response = redirect('/colorin/')
     return response

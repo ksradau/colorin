@@ -1,7 +1,7 @@
 from django.urls import path
 
 from apps.colorin.apps import ColorinConfig
-from apps.colorin.views import IndexView, AllPhotoView, FileFieldView, download_zip, update_info, update_info_first, match_images
+from apps.colorin.views import IndexView, AllPhotoView, FileFieldView, download_zip, update_info, update_info_first, match_images, add_emoji_to_db
 
 app_name = ColorinConfig.name
 
@@ -13,4 +13,5 @@ urlpatterns = [
     path("update/", update_info, name="update"),
     path("fupdate/", update_info_first, name="update-first"),
     path("match/", match_images, name="match"),
+    path("add-emoji/", add_emoji_to_db, name="add-emoji"),
 ]

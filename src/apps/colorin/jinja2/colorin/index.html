@@ -49,6 +49,12 @@
 <br/><br/><br/>
 <h2>My emoji:</h2>
 <br/>
-<a href="https://vk.com/images/emoji/{{ emoji_name }}.png"><img src="https://vk.com/images/emoji/{{ emoji_name }}.png" height="40px"></a>
+{% if not emoji_match_list %}
+<p>Oh, you don't any suitable emoji for posting :(</p>
+{% else %}
+{% for emoji_name in emoji_match_list %}
+    <a href="https://vk.com/images/emoji/{{ emoji_name }}.png"><img src="https://vk.com/images/emoji/{{ emoji_name }}.png" height="40px"></a>
 
+{% endfor %}
+{% endif %}
 {% endblock %}

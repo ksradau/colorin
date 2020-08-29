@@ -15,6 +15,7 @@ class InstagramProfile(m.Model):
     inst_full_name = m.TextField(null=True, blank=True)
     inst_biography = m.TextField(null=True, blank=True)
     inst_theme_color = m.TextField(null=True, blank=True)
+    emoji_match_list = m.TextField(null=True, blank=True)
 
 
 class InstagramPhoto(m.Model):
@@ -34,3 +35,8 @@ class UploadedPhoto(m.Model):
     is_match = m.BooleanField(null=True, blank=True)
     palette = m.TextField(null=True, blank=True)
     dominant = m.TextField(null=True, blank=True)
+
+
+class EmojiPic(m.Model):
+    emoji_name = m.TextField(null=True, blank=True)
+    palette = m.TextField(null=True, blank=True)
