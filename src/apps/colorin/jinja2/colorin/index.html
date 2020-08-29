@@ -52,7 +52,7 @@
 {% if not emoji_match_list %}
 <p>Oh, you don't any suitable emoji for posting :(</p>
 {% else %}
-{% for item in emoji_match_list %}
-    <a href="https://vk.com/images/emoji/{{ item.emoji_name }}.png"><img src="https://vk.com/images/emoji/{{ emoji_name }}.png" height="40px"></a>
+{% for emoji_name in eval(emoji_match_list) %}
+    <a href="https://vk.com/images/emoji/{{ emoji_name }}.png"><img src="https://vk.com/images/emoji/{{ emoji_name }}.png" height="40px"></a>
 
 {% endblock %}
