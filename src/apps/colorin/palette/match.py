@@ -4,11 +4,7 @@ import requests
 
 
 def match(request):
-    inst_photo_queryset = InstagramPhoto.objects.filter(user_id=request.user.id).all()
-    all_colors_array = []
-    for item in inst_photo_queryset:
-        similar_list = eval(item.similar)
-        all_colors_array += similar_list
+    all_colors_array = get_all_colors_array(request)
 
     uploaded_photo_queryset = UploadedPhoto.objects.filter(user_id=request.user.id).all()
     for img in uploaded_photo_queryset:
@@ -30,6 +26,9 @@ def match(request):
             print("is_match field FALSE")
         img.save()
 
+
+def match_emoji(request):
+    all_colors_array = get_all_colors_array(request)
     list_of_match_emoji = []
     emoji_pic_queryset = EmojiPic.objects.all()
     for pic in emoji_pic_queryset:
@@ -46,6 +45,15 @@ def match(request):
         inst_profile = InstagramProfile.objects.get(user_id=request.user.id)
         inst_profile.emoji_match_list = list_of_match_emoji
         inst_profile.save()
+
+
+def get_all_colors_array(request):
+    inst_photo_queryset = InstagramPhoto.objects.filter(user_id=request.user.id).all()
+    all_colors_array = []
+    for item in inst_photo_queryset:
+        similar_list = eval(item.similar)
+        all_colors_array += similar_list
+    return all_colors_array
 
 
 def get_similar_of_all_img_colors(palette):

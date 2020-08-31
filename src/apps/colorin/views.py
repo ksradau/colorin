@@ -14,7 +14,7 @@ from django.shortcuts import redirect
 import io
 import zipfile
 from apps.colorin.palette.get import get_palette
-from apps.colorin.palette.match import match
+from apps.colorin.palette.match import match, match_emoji
 import os.path
 from apps.colorin.parsing.images import save_images
 import random
@@ -125,5 +125,11 @@ def match_images(request):
 
 def add_emoji_to_db(request):
     add_emoji(request)
+    response = redirect('/colorin/')
+    return response
+
+
+def match_emoji_pics(request):
+    match_emoji(request)
     response = redirect('/colorin/')
     return response

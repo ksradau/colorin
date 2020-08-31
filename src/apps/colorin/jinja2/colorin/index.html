@@ -50,11 +50,13 @@
 <h2>My emoji:</h2>
 <br/>
 {% if not emoji_match_list %}
-<p>Oh, you don't any suitable emoji for posting :(</p>
+<p>Oh, now you don't any suitable emoji for posting :(</p>
+<p><a href="{{ url('colorin:match-emoji') }}">Match</a>> them first!</p>
 {% else %}
 {% for emoji_name in emoji_match_list %}
     <a href="https://vk.com/images/emoji/{{ emoji_name }}.png"><img src="https://vk.com/images/emoji/{{ emoji_name }}.png" height="40px"></a>
 
 {% endfor %}
+<p>Need update? <a href="{{ url('colorin:match-emoji') }}">Press here</a> if smth changed on your IG.</p>
 {% endif %}
 {% endblock %}
