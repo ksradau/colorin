@@ -18,10 +18,12 @@
 {% if inst_full_name %}
 <p>Full Name: {{ inst_full_name | safe }}</p>
 {% endif %}
+<br/><br/>
 
 {% if not instagram_photo_list %}
 <p>Oh, there are not images from Instagram. Add something in your IG profile and update info by button at the top.</p>
 {% else %}
+<p>My IG photo:</p>
 {% for item in instagram_photo_list %}
             <a href="{{ item.photo.url }}"><img src="{{ item.photo.url }}" height="200px"></a>
 {% endfor %}
@@ -37,6 +39,7 @@
 {% if not uploaded_photo_match_list %}
 <p>Sorry, but you don't any suitable shots for your IG Profile. Let's upload a little more and press MATCH button!</p>
 {% else %}
+<p>Here see only suitable for your Inst images</p>
 {% for item in uploaded_photo_match_list %}
             <a href="{{ item.photo.url }}"><img src="{{ item.photo.url }}" height="200px"></a>
 {% endfor %}
@@ -44,6 +47,7 @@
 {% endif %}
 <br/><br/>
 <a class="nes-btn is-warning" href="{{ url('colorin:match') }}">~ MATCH! ~</a><br/><br/>
+<p>Press this after adding to the app or update from IG.</p>
 
 
 <br/><br/><br/>
