@@ -57,7 +57,7 @@ def get_similar_of_all_img_colors(palette):
 
 
 def get_similar_of_one_color(color):
-    T = 15
+    T = 20
     tolerance_list = []
     r, g, b = color[0], color[1], color[2]
     for rn in range(r - T, r + T):
