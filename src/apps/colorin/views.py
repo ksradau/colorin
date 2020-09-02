@@ -35,18 +35,18 @@ class IndexView(TemplateView):
         inst_profile = InstagramProfile.objects.filter(user_id=self.request.user.id).first()
 
         if inst_profile is not None:
-
             ctx = {"inst_biography": inst_profile.inst_biography,
-                   "inst_full_name": inst_profile.inst_full_name,
-                   "inst_profile_pic": inst_profile.inst_profile_pic,
-                   "inst_theme_color": inst_profile.inst_theme_color[1:-1],
-                   "instagram_photo_list": InstagramPhoto.objects.filter(user_id=self.request.user.id),
-                   "uploaded_photo_match_list": UploadedPhoto.objects.filter(user_id=self.request.user.id, is_match=True),
-                   "emoji_match_list": eval(inst_profile.emoji_match_list),
-                   }
+                       "inst_full_name": inst_profile.inst_full_name,
+                       "inst_profile_pic": inst_profile.inst_profile_pic,
+                       "inst_theme_color": inst_profile.inst_theme_color[1:-1],
+                       "instagram_photo_list": InstagramPhoto.objects.filter(user_id=self.request.user.id),
+                       "uploaded_photo_match_list": UploadedPhoto.objects.filter(user_id=self.request.user.id, is_match=True),
+                       }
+
+            if inst_profile.emoji_match_list is not None:
+                ctx["emoji_match_list"] = eval(inst_profile.emoji_match_list)
 
             ctx.update(parent_ctx)
-
             return ctx
 
 

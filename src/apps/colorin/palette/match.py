@@ -18,7 +18,7 @@ def match(request):
                 print("~~~ Oh no")
         print("~~~ Num of matches in img:")
         print(match_counter)
-        if match_counter > 4:
+        if match_counter > 3:
             img.is_match = True
             print("is_match field TRUE")
         else:
