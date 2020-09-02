@@ -9,9 +9,9 @@ from apps.authorization.views import SignUpView
 urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
-    path("pwc/", PasswordChangeView.as_view(), name="password_change"),
+    path("password_change_form/", PasswordChangeView.as_view(), name="password_change"),
     path(
-        "pwc/done/",
+        "password_change_done/",
         PasswordChangeDoneView.as_view(),
         name="password_change_done",
     ),

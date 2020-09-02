@@ -2,14 +2,24 @@
 
 {% block main %}
 
-<h2>Try it now</h2>
 
+
+<br/><p class="nes-balloon from-left">What is Colorin?</p>
+
+<p>Colorin is a fabulous app for <span class="nes-text is-warning">analyzing Instagram photo palette and finding the most suitable ones for posting.</span></p>
+<p class="nes-balloon from-left">How it finds similar photo?</p>
+<p>The process for searching images similar in color is implemented using k-means, arrays that expand each color of the palette and the matching algorithm</p>
+<p class="nes-balloon from-left">What also can do this application?</p>
+<p>App can suggest suitable emoji pics, download good for posting images in ZIP, upload multiply files, update information.</p>
+<br/>
+<div class="nes-container is-dark">
+<h2>Try it now</h2>
 {% if not user.is_authenticated %}
 <p>You are not authenticated. <a href="{{ url('login') }}">Sign in</a> for starting or <a href="{{ url('signup') }}">sign up</a> if you don't have any profile.</p>
 {% else %}
     <p>Let's try Colorin! Jump to your <a href="{{ url('colorin:index') }}">personal cabinet</a> for starting</p>
 {% endif %}
-
+</div>
 
 
 {% endblock %}

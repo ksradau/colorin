@@ -55,7 +55,7 @@
 <br/>
 {% if not emoji_match_list %}
 <p>Oh, now you don't any suitable emoji for posting :(</p>
-<p><a href="{{ url('colorin:match-emoji') }}">Match</a>> them first!</p>
+<p><a href="{{ url('colorin:match-emoji') }}">Match</a> them first!</p>
 {% else %}
 {% for emoji_name in emoji_match_list %}
     <a href="https://vk.com/images/emoji/{{ emoji_name }}.png"><img src="https://vk.com/images/emoji/{{ emoji_name }}.png" height="40px"></a>
