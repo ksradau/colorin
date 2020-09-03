@@ -17,7 +17,7 @@ pillow = "*"
 colorthief = "*"
 pillow = "*"
 haishoku = "*"
-django = {extras = ["bcrypt"],version = "==3.1"}
+django = {extras = ["bcrypt"],version = "*"}
 whitenoise = "*"
 dj-database-url = "*"
 dynaconf = {extras = ["yaml"],version = "*"}
