@@ -7,6 +7,7 @@ import random
 import string
 from apps.colorin.palette.get import get_palette
 from apps.colorin.palette.match import get_similar_of_all_img_colors
+from proxy_requests import ProxyRequests
 
 
 def update_profile(request):
@@ -24,14 +25,13 @@ def update_profile(request):
                    mid='W02wugALAAGZdS00qvpTLOWHC1JL'
                    )
 
-    r = requests.get(url, cookies=cookies, headers={
-        'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"})
-    instagram_json = r.json()
+    headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
 
-    cookie_text1 = '< RequestsCookieJar[ < Cookie csrftoken = GDHNlVMWYIUQgGFJ86bY4lCpheXZjrfr for .instagram.com / >, < Cookie ig_did=CF56F778-6F16-42B8-BE7B-22F4148978C9 for.instagram.com / >, < Cookie mid=X1d-zQALAAEWglvdWVtIKAcAWQz2 for.instagram.com / >, < Cookie urlgen="{46.53.243.255: 42772}:1kFd7u:TaBAaruyUTHdQlW5GvZ4PQvM1XE" for.instagram.com / >] >'
-    cookie_text2 = '<RequestsCookieJar[<Cookie csrftoken=0czD8XL8wvbx8QJ3gXRySt2FpHPJa9kk for .instagram.com/>, <Cookie ig_did=B59CC3DA-2327-460A-9092-2EC58D993C34 for .instagram.com/>, <Cookie mid=X1eARgALAAGLecFzQst-ZFSxIALc for .instagram.com/>, <Cookie urlgen="{46.53.243.255: 42772}:1kFdDz:jM2XCIHok1lRUFAOAai6JymJZAU" for .instagram.com/>]>'
-    #cookie_dict = r.cookies
-    #print(cookie_dict)
+    r = ProxyRequests(url)
+    r.set_headers(headers)
+    r.get_with_headers()
+
+    instagram_json = r.get_json()
 
     inst_user = instagram_json["graphql"]["user"]
     inst_profile_pic = inst_user["profile_pic_url_hd"]
@@ -131,9 +131,13 @@ def create_profile(request):
         mid='W02wugALAAGZdS00qvpTLOWHC1JL'
         )
 
-    r = requests.get(url, cookies=cookies, headers={
-        'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"})
-    instagram_json = r.json()
+    headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
+
+    r = ProxyRequests(url)
+    r.set_headers(headers)
+    r.get_with_headers()
+
+    instagram_json = r.get_json()
 
     inst_user = instagram_json["graphql"]["user"]
     inst_profile_pic = inst_user["profile_pic_url_hd"]

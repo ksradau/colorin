@@ -37,6 +37,7 @@ lxml = "*"
 beautifulsoup4 = "*"
 instapy = "*"
 numpy = "*"
+proxy-requests = "*"
 
 [requires]
 python_version = "3.8"
