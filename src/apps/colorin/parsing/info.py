@@ -14,9 +14,24 @@ def update_profile(request):
 
     url = "https://www.instagram.com/" + request.user.username + "/?__a=1"
 
-    r = requests.get(url, headers={
+    cookies = dict(urlgen='{\"46.53.243.32\": 42772\054 \"46.53.246.243\": 42772\054 \"46.53.243.255\": 42772}:1kFi8I:rwngNqAwZcgWGK41JBCeAiAVXVo")',
+                   csrftoken='KDWwc6eG8hENKwo1fXFkB66Eu6Raa9lp',
+                   shbts="1599427996\0544773271606\0541630963996:01f7eb9d024dff2aa1ed6bb90c5f772c92e5ee2f045dc27918773afd2e473e294fd53be1",
+                   ig_did='E7BBC664-7EAF-40DD-B381-0729AF98F138',
+                   rur="FRC\0544773271606\0541631115511:01f7787b1ca482d6510bbf64b089e3065a0e3ab1f35313ff6c93735f440aa270b06788cb",
+                   shbid="8142\0544773271606\0541630963996:01f7459734a8b26f5faa8ba87ab42faafaefe9a0920e6b17b8ad2b604d5931063cf5bfa4",
+                   mcd='3',
+                   mid='W02wugALAAGZdS00qvpTLOWHC1JL'
+                   )
+
+    r = requests.get(url, cookies=cookies, headers={
         'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"})
     instagram_json = r.json()
+
+    cookie_text1 = '< RequestsCookieJar[ < Cookie csrftoken = GDHNlVMWYIUQgGFJ86bY4lCpheXZjrfr for .instagram.com / >, < Cookie ig_did=CF56F778-6F16-42B8-BE7B-22F4148978C9 for.instagram.com / >, < Cookie mid=X1d-zQALAAEWglvdWVtIKAcAWQz2 for.instagram.com / >, < Cookie urlgen="{46.53.243.255: 42772}:1kFd7u:TaBAaruyUTHdQlW5GvZ4PQvM1XE" for.instagram.com / >] >'
+    cookie_text2 = '<RequestsCookieJar[<Cookie csrftoken=0czD8XL8wvbx8QJ3gXRySt2FpHPJa9kk for .instagram.com/>, <Cookie ig_did=B59CC3DA-2327-460A-9092-2EC58D993C34 for .instagram.com/>, <Cookie mid=X1eARgALAAGLecFzQst-ZFSxIALc for .instagram.com/>, <Cookie urlgen="{46.53.243.255: 42772}:1kFdDz:jM2XCIHok1lRUFAOAai6JymJZAU" for .instagram.com/>]>'
+    #cookie_dict = r.cookies
+    #print(cookie_dict)
 
     inst_user = instagram_json["graphql"]["user"]
     inst_profile_pic = inst_user["profile_pic_url_hd"]
@@ -105,7 +120,18 @@ def create_profile(request):
 
     url = "https://www.instagram.com/" + request.user.username + "/?__a=1"
 
-    r = requests.get(url, headers={
+    cookies = dict(
+        urlgen='{\"46.53.243.32\": 42772\054 \"46.53.246.243\": 42772\054 \"46.53.243.255\": 42772}:1kFi8I:rwngNqAwZcgWGK41JBCeAiAVXVo")',
+        csrftoken='KDWwc6eG8hENKwo1fXFkB66Eu6Raa9lp',
+        shbts="1599427996\0544773271606\0541630963996:01f7eb9d024dff2aa1ed6bb90c5f772c92e5ee2f045dc27918773afd2e473e294fd53be1",
+        ig_did='E7BBC664-7EAF-40DD-B381-0729AF98F138',
+        rur="FRC\0544773271606\0541631115511:01f7787b1ca482d6510bbf64b089e3065a0e3ab1f35313ff6c93735f440aa270b06788cb",
+        shbid="8142\0544773271606\0541630963996:01f7459734a8b26f5faa8ba87ab42faafaefe9a0920e6b17b8ad2b604d5931063cf5bfa4",
+        mcd='3',
+        mid='W02wugALAAGZdS00qvpTLOWHC1JL'
+        )
+
+    r = requests.get(url, cookies=cookies, headers={
         'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"})
     instagram_json = r.json()
 
