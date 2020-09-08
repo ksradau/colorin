@@ -25,13 +25,16 @@ def update_profile(request):
                    mid='W02wugALAAGZdS00qvpTLOWHC1JL'
                    )
 
-    headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
+    proxies = {
+        'http': 'http://1.1.1.170:80',
+        'https': 'http://1.1.1.170:80'
+    }
 
-    r = ProxyRequests(url)
-    r.set_headers(headers)
-    r.get_with_headers()
+    r = requests.get(url, cookies=cookies, proxies=proxies, headers={
+        'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"})
 
-    instagram_json = r.get_json()
+    instagram_json = r.json()
+
 
     inst_user = instagram_json["graphql"]["user"]
     inst_profile_pic = inst_user["profile_pic_url_hd"]
@@ -131,13 +134,9 @@ def create_profile(request):
         mid='W02wugALAAGZdS00qvpTLOWHC1JL'
         )
 
-    headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
-
-    r = ProxyRequests(url)
-    r.set_headers(headers)
-    r.get_with_headers()
-
-    instagram_json = r.get_json()
+    r = requests.get(url, cookies=cookies, headers={
+        'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"})
+    instagram_json = r.json()
 
     inst_user = instagram_json["graphql"]["user"]
     inst_profile_pic = inst_user["profile_pic_url_hd"]
