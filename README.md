@@ -2,14 +2,7 @@ App for analyzing Instagram photo palette and finding the most suitable ones for
 
 See how it works!
 
-![1 photo](https://sun9-47.userapi.com/5Mm7Rk1EaHlt7gicIst00g7KZ__hszjH9g4A0g/TDjXhc4dlQY.jpg)
-
-![2 photo](https://web.telegram.org/979bf467-f0b2-46b3-94b1-161138de67f9)
-
-![3 photo](https://web.telegram.org/eb9fb267-a835-44d6-a33f-bfa38ea66de3)
-
-![4 photo](https://sun9-11.userapi.com/eGLGoD3WXC7ADBFzPQiCm-P-ZE8IKOjpPosNBg/Y333__NlsQ0.jpg)
-
-![5 photo](https://sun9-62.userapi.com/HwNyPVpO_OAM3cGwAOOTyl9XojEEUEY63-axyg/a0DR7W-5PaY.jpg)
-
-![7 photo](https://sun9-11.userapi.com/l6mOR7pC_DQ_bIBVct7IM-UdGGUh7owRRP25Ag/pCqRglCdUCI.jpg)
+<img width="1225" height="632" alt="Screenshot 2025-11-01 at 01 46 56" src="https://github.com/user-attachments/assets/9e126e43-fd9a-4cc2-9ac4-dbcab5e1105c" />
+<img width="1230" height="630" alt="Screenshot 2025-11-01 at 01 47 11" src="https://github.com/user-attachments/assets/8405d7eb-e225-465c-a256-454083ffcd7f" />
+<img width="1232" height="621" alt="Screenshot 2025-11-01 at 01 47 24" src="https://github.com/user-attachments/assets/16cbb979-fbea-48f0-8d00-f53171805a90" />
+<img width="1233" height="595" alt="Screenshot 2025-11-01 at 01 47 41" src="https://github.com/user-attachments/assets/4edca73b-6310-457a-87f0-fd1c10574727" />
